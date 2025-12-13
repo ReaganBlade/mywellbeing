@@ -1,6 +1,6 @@
+import ActiveCard from "@/components/ActiveCard";
+import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
-import { Button } from "./components/ui/button";
-import ActiveCard from "./components/ActiveCard";
 
 type ActiveWindow = {
   owner: string | null;
@@ -10,7 +10,7 @@ type ActiveWindow = {
   timestamp: number;
 };
 
-function App() {
+const Home = () => {
   const [active, setActive] = useState<ActiveWindow | null>(null);
 
   useEffect(() => {
@@ -24,12 +24,14 @@ function App() {
     return () => {
       try {
         if (typeof unsubscribe === "function") unsubscribe();
-      } catch {}
+      } catch (err) {
+        console.log("Error:", err);
+      }
     };
   }, []);
 
   return (
-    <div className="min-h-screen w-full bg-gray-900 text-white p-8">
+    <div>
       <h1 className="text-3xl font-bold mb-6">MyWellbeing — Active App</h1>
 
       <ActiveCard active={active} />
@@ -40,6 +42,6 @@ function App() {
       </div>
     </div>
   );
-}
+};
 
-export default App;
+export default Home;
