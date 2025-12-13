@@ -1,11 +1,12 @@
+import AppLayout from "@/components/layout/AppLayout";
 import Router from "./Router";
 
 function App() {
 
   return (
-    <div className="min-h-screen w-full bg-gray-900 text-white p-8">
+    <AppLayout>
       <Router />
-    </div>
+    </AppLayout>
   );
 }
 
