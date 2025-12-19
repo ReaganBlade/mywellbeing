@@ -7,6 +7,7 @@ const { app, BrowserWindow } = require("electron");
 const path = require("path");
 const activeWin = require("active-win");
 const { platform } = require("os");
+const up = require('/db/migrations.ts');
 
 const POLL_MS = 1000;
 
@@ -99,6 +100,7 @@ function createWindow() {
 app.whenReady().then(() => {
   createWindow();
   startPolling();
+
 });
 
 app.on("window-all-closed", () => {

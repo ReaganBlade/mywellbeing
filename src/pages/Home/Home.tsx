@@ -1,6 +1,7 @@
 import ActiveCard from "@/components/ActiveCard";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
+import { useUsageStore } from "@/store/usageStore";
 
 type ActiveWindow = {
   owner: string | null;
@@ -12,6 +13,7 @@ type ActiveWindow = {
 
 const Home = () => {
   const [active, setActive] = useState<ActiveWindow | null>(null);
+  const {isLoading, setIsLoading} = useUsageStore();
 
   useEffect(() => {
     const unsubscribe = window.electronAPI?.onActiveWindow(
@@ -39,6 +41,17 @@ const Home = () => {
       <div className="mt-6 flex justify-center">
         <Button className="mr-3">Rescan</Button>
         <Button variant="ghost">Settings</Button>
+      </div>
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold">Today</h2>
+        <button className="rounded bg-muted px-3 py-1 text-sm text-white" onClick={() => setIsLoading(!isLoading)
+        }>
+          Toggle Loading
+        </button>
+
+        <p className="text-muted-foreground">
+          Loading State: {isLoading ? "True" : "False"}
+        </p>
       </div>
     </div>
   );
